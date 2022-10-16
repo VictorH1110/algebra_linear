@@ -149,9 +149,16 @@ def baseToMatrix(base):
 
 # função para matriz de mudança de base
 def matrixBaseChanger(bmatriz1:list, bmatriz2:list):
-  try: 
+  dic = {}
+  if determinante(bmatriz1) == 0:
+    dic["base1"] = "Erro! Base 1 não é L.I"
+  if determinante(bmatriz2) == 0:
+    dic["base2"] = "Erro! Base 2 não é L.I"
+  if not dic:
     return multMatrix(inversa(bmatriz1), bmatriz2)
-  except:
-    return print('As bases não são linearmente independentes ou a determinante é 0!')
+  else:
+    return dic
+
+
 
 
