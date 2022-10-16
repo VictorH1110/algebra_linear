@@ -1,4 +1,5 @@
 # função para dividir números com uma maior precisão
+from email.mime import base
 from re import X
 
 
@@ -73,6 +74,7 @@ def inversa(matriz:list):
   dimensao = len(matriz)
   matriz_identidade = []
   lista_auxiliar = []
+  dic = {"erro" : "Erro! Matriz não admite inversa!"}
 
   for i in range(dimensao):
     for j in range(dimensao):
@@ -113,7 +115,7 @@ def inversa(matriz:list):
           matriz[linha][i] = matriz[linha][i]+(matriz[pivot][i] * razao)
           matriz_identidade[linha][i] = matriz_identidade[linha][i]+(matriz_identidade[pivot][i] * razao)
         except:
-          return print('Matriz não admite inversa.')
+          return dic
     
   return matriz_identidade
 
@@ -151,13 +153,16 @@ def baseToMatrix(base):
 def matrixBaseChanger(bmatriz1:list, bmatriz2:list):
   dic = {}
   if determinante(bmatriz1) == 0:
-    dic["base1"] = "Erro! Base 1 não é L.I"
+    dic["erro"] = "Erro! Base 1 não é L.I"
   if determinante(bmatriz2) == 0:
-    dic["base2"] = "Erro! Base 2 não é L.I"
+    dic["erro"] = "Erro! Base 2 não é L.I"
+  if determinante(bmatriz1) == 0 and determinante(bmatriz2) == 0:
+    dic["erro"] = "Nenhuma das bases é L.I"
   if not dic:
     return multMatrix(inversa(bmatriz1), bmatriz2)
   else:
     return dic
+  
 
 
 
