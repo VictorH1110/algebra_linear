@@ -2,7 +2,6 @@
 from email.mime import base
 from re import X
 
-
 def divFloat(x, y):
   a = b = 0
 
@@ -37,7 +36,10 @@ def ler_matriz():
   return matriz
 
 # função para calcular a determinante de uma matriz quadrada
-def determinante(matriz:list):
+def determinante(m:list):
+  matriz = []
+  for l in m:
+    matriz.append(l[:])
   dimensao = len(matriz)
   troca = 1
   determinante = 1
@@ -152,18 +154,19 @@ def baseToMatrix(base):
 # função para matriz de mudança de base
 def matrixBaseChanger(bmatriz1:list, bmatriz2:list):
   dic = {}
-  if determinante(bmatriz1) == 0:
+  d1 = determinante(bmatriz1)
+  d2 = determinante(bmatriz2)
+  if d1 == 0:
     dic["erro"] = "Erro! Base 1 não é L.I"
-  if determinante(bmatriz2) == 0:
+  if d2 == 0:
     dic["erro"] = "Erro! Base 2 não é L.I"
-  if determinante(bmatriz1) == 0 and determinante(bmatriz2) == 0:
+  if d1 == 0 and d2 == 0:
     dic["erro"] = "Nenhuma das bases é L.I"
   if not dic:
     return multMatrix(inversa(bmatriz1), bmatriz2)
   else:
     return dic
   
-
 
 
 
